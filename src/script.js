@@ -1,0 +1,228 @@
+function displayNewCity(event) {
+  event.preventDefault();
+  let newCity = document.querySelector("#new-city").value;
+
+  let searchInput = newCity.split(" ");
+  for (let i = 0; i < searchInput.length; i++) {
+    searchInput[i] = searchInput[i][0].toUpperCase() + searchInput[i].substr(1);
+  }
+  let city = searchInput.join(" ");
+
+  let weatherCityHeader = document.querySelector("#weather-city");
+  weatherCityHeader.innerHTML = `${city}`;
+}
+
+function displayCurrentTime() {
+  let now = new Date();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[now.getDay()];
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let currentTime = `${day} ${hours}:${minutes}`;
+  let searchTime = document.querySelector("#current-time");
+  searchTime.innerHTML = `${currentTime}`;
+}
+
+function getCurrentTemp() {
+  let city = document.querySelector("#new-city").value;
+
+  let apiKey = "56a5727662e9674f972770adf6f30527";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayCurrentData);
+}
+
+function displayCurrentData(response) {
+  console.log(response.data);
+
+  let currentTemp = Math.round(response.data.main.temp);
+  let temperature = document.querySelector("#current-temp");
+  temperature.innerHTML = `${currentTemp}`;
+
+  let currentLow = Math.round(response.data.main.temp_min);
+  let lowTemp = document.querySelector("#current-low");
+  lowTemp.innerHTML = `${currentLow}`;
+
+  let currentHigh = Math.round(response.data.main.temp_max);
+  let highTemp = document.querySelector("#current-high");
+  highTemp.innerHTML = `${currentHigh}`;
+
+  let currentCity = `${response.data.name}`;
+  //To add country, change to let currentCity = `${response.data.name}, ${response.data.sys.country}`;
+  let weatherCityHeader = document.querySelector("#weather-city");
+  weatherCityHeader.innerHTML = `${currentCity}`;
+
+  let mainDescription = response.data.weather[0].main;
+  updateEmoji(mainDescription);
+
+  let description = response.data.weather[0].description;
+  updateDescription(description);
+
+  let feelsLike = response.data.main.feels_like;
+  updateFeelsLike(feelsLike);
+
+  let wind = response.data.wind.speed;
+  updateWind(wind);
+
+  let humidity = response.data.main.humidity;
+  updateHumidity(humidity);
+}
+
+function getPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function showPosition(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+
+  let apiKey = "56a5727662e9674f972770adf6f30527";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayCurrentData);
+}
+
+function updateEmoji(mainDescription) {
+  //console.log(mainDescription);
+  if (mainDescription === "Clear") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `☀️`;
+  }
+
+  if (mainDescription === "Clouds") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `☁️`;
+  }
+
+  if (mainDescription === "Haze") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `🌥`;
+  }
+
+  if (mainDescription === "Mist" || mainDescription === "Drizzle") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `🌨`;
+  }
+
+  if (mainDescription === "Rain") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `🌧`;
+  }
+
+  if (mainDescription === "Snow") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `❄️`;
+  }
+
+  if (mainDescription === "Thunderstorm") {
+    let emoji = document.querySelector(".current-emoji");
+    emoji.innerHTML = `⛈`;
+  }
+}
+// other descriptions: haze, clouds, mist, clear, drizzle
+
+function updateDescription(description) {
+  let descriptionInput = description.split(" ");
+  for (let i = 0; i < descriptionInput.length; i++) {
+    descriptionInput[i] =
+      descriptionInput[i][0].toUpperCase() + descriptionInput[i].substr(1);
+  }
+  let newDescription = descriptionInput.join(" ");
+
+  console.log(newDescription);
+  let currentDescription = document.querySelector("#weather-description");
+  currentDescription.innerHTML = `${newDescription}`;
+}
+
+function updateFeelsLike(feelsLike) {
+  let newFeelsLike = Math.round(feelsLike);
+  let currentFeelsLike = document.querySelector("#feels-like");
+  currentFeelsLike.innerHTML = `Feels like ${newFeelsLike}º`;
+}
+
+function updateWind(wind) {
+  let newWind = Math.round(wind);
+  let currentWind = document.querySelector("#wind");
+  currentWind.innerHTML = `${newWind} mph Wind`;
+}
+
+function updateHumidity(humidity) {
+  let currentHumidity = document.querySelector("#humidity");
+  currentHumidity.innerHTML = `${humidity}% Humidity`;
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let fahrenheitTemp = document.querySelector("#current-temp");
+  fahrenheitTemp = Math.round(fahrenheitTemp.textContent);
+  let celsiusTemp = Math.round(((fahrenheitTemp - 32) * 5) / 9);
+  let currentTemp = document.querySelector("#current-temp");
+  currentTemp.innerHTML = `${celsiusTemp}`;
+
+  let fahrenheitLowTemp = document.querySelector("#current-low").textContent;
+  let celsiusLowTemp = Math.round(((fahrenheitLowTemp - 32) * 5) / 9);
+  let currentLowTemp = document.querySelector("#current-low");
+  currentLowTemp.innerHTML = `${celsiusLowTemp}`;
+
+  let fahrenheitHighTemp = document.querySelector("#current-high").textContent;
+  let celsiusHighTemp = Math.round(((fahrenheitHighTemp - 32) * 5) / 9);
+  let currentHighTemp = document.querySelector("#current-high");
+  currentHighTemp.innerHTML = `${celsiusHighTemp}`;
+
+  let fahrenheitFeelsLikeTemp =
+    document.querySelector("#feels-like-temp").textContent;
+  let celsiusFeelsLikeTemp = Math.round(
+    ((fahrenheitFeelsLikeTemp - 32) * 5) / 9
+  );
+  let currentFeelsLikeTemp = document.querySelector("#feels-like-temp");
+  currentFeelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp}`;
+}
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let celsiusTemp = document.querySelector("#current-temp");
+  celsiusTemp = Math.round(celsiusTemp.textContent);
+  let fahrenheitTemp = Math.round((celsiusTemp * 9) / 5 + 32);
+  let currentTemp = document.querySelector("#current-temp");
+  currentTemp.innerHTML = `${fahrenheitTemp}`;
+
+  let celsiusLowTemp = document.querySelector("#current-low").textContent;
+  let fahrenheitLowTemp = Math.round((celsiusLowTemp * 9) / 5 + 32);
+  let currentLowTemp = document.querySelector("#current-low");
+  currentLowTemp.innerHTML = `${fahrenheitLowTemp}`;
+
+  let celsiusHighTemp = document.querySelector("#current-high").textContent;
+  let fahrenheitHighTemp = Math.round((celsiusHighTemp * 9) / 5 + 32);
+  let currentHighTemp = document.querySelector("#current-high");
+  currentHighTemp.innerHTML = `${fahrenheitHighTemp}`;
+
+  let celsiusFeelsLikeTemp =
+    document.querySelector("#feels-like-temp").textContent;
+  let fahrenheitFeelsLikeTemp = Math.round((celsiusFeelsLikeTemp * 9) / 5 + 32);
+  let currentFeelsLikeTemp = document.querySelector("#feels-like-temp");
+  currentFeelsLikeTemp.innerHTML = `${fahrenheitFeelsLikeTemp}`;
+}
+
+displayCurrentTime();
+
+let newCitySearch = document.querySelector("#new-city-search");
+newCitySearch.addEventListener("submit", displayNewCity);
+//newCitySearch.addEventListener("submit", displayCurrentTime);
+newCitySearch.addEventListener("submit", getCurrentTemp);
+
+let useCurrentLocation = document.querySelector("button");
+useCurrentLocation.addEventListener("click", getPosition);
+useCurrentLocation.addEventListener("click", displayCurrentTime);
+
+let fahrenheitToCelsius = document.querySelector("#celsius");
+fahrenheitToCelsius.addEventListener("click", convertToCelsius);
+
+let celsiusToFahrenheit = document.querySelector("#fahrenheit");
+celsiusToFahrenheit.addEventListener("click", convertToFahrenheit);
