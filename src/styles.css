@@ -43,7 +43,7 @@ p {
   font-weight: 500;
 }
 
-.weather-app {
+.weather-app-container {
   max-width: 800px;
   border: 2px solid #2f617f;
   margin: 30px auto;
@@ -135,6 +135,12 @@ p {
   margin: 0px 10px;
   box-shadow: 3px 3px 8px rgba(54, 52, 52, 0.7);
   background: rgba(176, 122, 223, 0.1);
+}
+
+.developer-links {
+  display: block;
+  position: relative;
+  margin-top: -20px;
 }
 
 #new-city-submit:hover {
