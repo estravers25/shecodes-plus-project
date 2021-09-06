@@ -28,114 +28,116 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row city-search" id="new-city-search">
-        <div class="col-8 col-md-7">
-          <form>
-            <input
-              type="text"
-              placeholder="Search for a new city"
-              id="new-city"
-              class="ms-auto"
-            />
-          </form>
+      <div class="weather-app">
+        <div class="row city-search" id="new-city-search">
+          <div class="col-8 col-md-7">
+            <form>
+              <input
+                type="text"
+                placeholder="Search for a new city"
+                id="new-city"
+                class="ms-auto"
+              />
+            </form>
+          </div>
+          <div class="col-4 col-md-5">
+            <form>
+              <input type="submit" id="new-city-submit" />
+            </form>
+          </div>
         </div>
-        <div class="col-4 col-md-5">
-          <form>
-            <input type="submit" id="new-city-submit" />
-          </form>
+
+        <div class="row">
+          <div class="col-12 current-location-search ms-auto">
+            <button>Use Current Location</button>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12 current-location-search ms-auto">
-          <button>Use Current Location</button>
+        <div class="row justify-content-center">
+          <h1 class="col-6" id="weather-city">Longmont, CO</h1>
         </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <h1 class="col-6" id="weather-city">Longmont, CO</h1>
-      </div>
+        <div class="row justify-content-center">
+          <section class="current-weather col-4">
+            <h3 id="current-time"></h3>
+            <h2>
+              <span id="current-temp">68</span>
+              <span class="celsius-fahrenheit">
+                <span id="celsius">ºC</span> |
+                <span id="fahrenheit">ºF</span></span
+              >
+            </h2>
+            <p class="current-emoji">🌤</p>
+            <h3>
+              <span id="current-low">58</span>º /
+              <span id="current-high">87</span>º
+            </h3>
+          </section>
+        </div>
 
-      <div class="row justify-content-center">
-        <section class="current-weather col-4">
-          <h3 id="current-time"></h3>
-          <h2>
-            <span id="current-temp">68</span>
-            <span class="celsius-fahrenheit">
-              <span id="celsius">ºC</span> |
-              <span id="fahrenheit">ºF</span></span
-            >
-          </h2>
-          <p class="current-emoji">🌤</p>
-          <h3>
-            <span id="current-low">58</span>º /
-            <span id="current-high">87</span>º
+        <div class="row justify-content-center weather-data">
+          <h3 class="col-3" id="weather-description">Partly Sunny</h3>
+          <h3 class="col-3" id="feels-like">
+            Feels like <span id="feels-like-temp">72</span>º
           </h3>
-        </section>
-      </div>
+          <h3 class="col-3" id="wind">5 mph Wind</h3>
+          <h3 class="col-3" id="humidity">28% Humidity</h3>
+        </div>
 
-      <div class="row justify-content-center weather-data">
-        <h3 class="col-3" id="weather-description">Partly Sunny</h3>
-        <h3 class="col-3" id="feels-like">
-          Feels like <span id="feels-like-temp">72</span>º
-        </h3>
-        <h3 class="col-3" id="wind">5 mph Wind</h3>
-        <h3 class="col-3" id="humidity">28% Humidity</h3>
+        <div class="row justify-content-center five-day-forecast">
+          <section class="col next-day">
+            <h4>Thursday</h4>
+            <p>
+              72ºF / 94º F
+              <br />
+              Sunny
+              <br />
+              ☀️
+            </p>
+          </section>
+          <section class="col second-day">
+            <h4>Friday</h4>
+            <p>
+              65ºF / 84º F
+              <br />
+              Cloudy
+              <br />
+              ☁️
+            </p>
+          </section>
+          <section class="col third-day">
+            <h4>Saturday</h4>
+            <p>
+              55ºF / 77º F
+              <br />
+              Rain
+              <br />
+              🌧
+            </p>
+          </section>
+          <section class="col fourth-day">
+            <h4>Sunday</h4>
+            <p>
+              65ºF / 88º F
+              <br />
+              Partly Cloudy
+              <br />
+              🌤
+            </p>
+          </section>
+          <section class="col fifth-day">
+            <h4>Monday</h4>
+            <p>
+              76ºF / 97º F
+              <br />
+              Sunny
+              <br />
+              ☀️
+            </p>
+          </section>
+        </div>
+        </br>
       </div>
-
-      <div class="row justify-content-center five-day-forecast">
-        <section class="col next-day">
-          <h4>Thursday</h4>
-          <p>
-            72ºF / 94º F
-            <br />
-            Sunny
-            <br />
-            ☀️
-          </p>
-        </section>
-        <section class="col second-day">
-          <h4>Friday</h4>
-          <p>
-            65ºF / 84º F
-            <br />
-            Cloudy
-            <br />
-            ☁️
-          </p>
-        </section>
-        <section class="col third-day">
-          <h4>Saturday</h4>
-          <p>
-            55ºF / 77º F
-            <br />
-            Rain
-            <br />
-            🌧
-          </p>
-        </section>
-        <section class="col fourth-day">
-          <h4>Sunday</h4>
-          <p>
-            65ºF / 88º F
-            <br />
-            Partly Cloudy
-            <br />
-            🌤
-          </p>
-        </section>
-        <section class="col fifth-day">
-          <h4>Monday</h4>
-          <p>
-            76ºF / 97º F
-            <br />
-            Sunny
-            <br />
-            ☀️
-          </p>
-        </section>
-      </div>
-    </br>
       <div>
           <p>
               <a href="https://github.com/estravers25/shecodes-plus-project" target="blank">Open-source code</a>, by Ellie Stravers
