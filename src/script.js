@@ -29,9 +29,7 @@ function displayCurrentTime() {
   searchTime.innerHTML = `${currentTime}`;
 }
 
-function getCurrentTemp() {
-  let city = document.querySelector("#new-city").value;
-
+function search(city) {
   let apiKey = "56a5727662e9674f972770adf6f30527";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
@@ -39,7 +37,7 @@ function getCurrentTemp() {
 }
 
 function displayCurrentData(response) {
-  console.log(response.data);
+  //console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -126,7 +124,9 @@ function updateEmoji(mainDescription) {
     emoji.innerHTML = `⛈`;
   }
 }
-// other descriptions: haze, clouds, mist, clear, drizzle
+
+// other descriptions: haze, clouds, mist, clear, drizzle, scattered clouds
+// could try to pull icons from openweather
 
 function updateDescription(description) {
   let descriptionInput = description.split(" ");
@@ -136,7 +136,6 @@ function updateDescription(description) {
   }
   let newDescription = descriptionInput.join(" ");
 
-  console.log(newDescription);
   let currentDescription = document.querySelector("#weather-description");
   currentDescription.innerHTML = `${newDescription}`;
 }
@@ -210,12 +209,14 @@ function convertToFahrenheit(event) {
   currentFeelsLikeTemp.innerHTML = `${fahrenheitFeelsLikeTemp}`;
 }
 
-displayCurrentTime();
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#new-city");
+  search(cityInputElement.value);
+}
 
-let newCitySearch = document.querySelector("#new-city-search");
-newCitySearch.addEventListener("submit", displayNewCity);
-//newCitySearch.addEventListener("submit", displayCurrentTime);
-newCitySearch.addEventListener("submit", getCurrentTemp);
+let form = document.querySelector("#new-city-search");
+form.addEventListener("submit", handleSubmit);
 
 let useCurrentLocation = document.querySelector("button");
 useCurrentLocation.addEventListener("click", getPosition);
@@ -226,3 +227,7 @@ fahrenheitToCelsius.addEventListener("click", convertToCelsius);
 
 let celsiusToFahrenheit = document.querySelector("#fahrenheit");
 celsiusToFahrenheit.addEventListener("click", convertToFahrenheit);
+
+displayCurrentTime();
+
+search("New York");
