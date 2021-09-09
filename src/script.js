@@ -1,3 +1,18 @@
+function getPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function showPosition(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+
+  let apiKey = "56a5727662e9674f972770adf6f30527";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayCurrentData);
+}
+
 function displayNewCity(event) {
   event.preventDefault();
   let newCity = document.querySelector("#new-city").value;
@@ -37,7 +52,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  //console.log(response.data);
+  console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -56,8 +71,26 @@ function displayCurrentData(response) {
   let weatherCityHeader = document.querySelector("#weather-city");
   weatherCityHeader.innerHTML = `${currentCity}`;
 
-  let mainDescription = response.data.weather[0].main;
-  updateEmoji(mainDescription);
+  /*let mainDescription = response.data.weather[0].main;
+  updateEmoji(mainDescription);*/
+
+  let iconElement = document.querySelector(".current-emoji");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+  console.log(iconElement);
+
+  /*let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);*/
+
+  //let weatherIcon = response.data.weather[0].icon;
+  //updateWeatherIcon(weatherIcon);
 
   let description = response.data.weather[0].description;
   updateDescription(description);
@@ -72,24 +105,16 @@ function displayCurrentData(response) {
   updateHumidity(humidity);
 }
 
-function getPosition(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
+function updateWeatherIcon(weatherIcon) {
+  let iconElement = document.querySelector(".current-emoji");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+  );
 
-function showPosition(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
+  console.log(weatherIcon);
 
-  let apiKey = "56a5727662e9674f972770adf6f30527";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
-
-  axios.get(apiUrl).then(displayCurrentData);
-}
-
-function updateEmoji(mainDescription) {
-  //console.log(mainDescription);
-  if (mainDescription === "Clear") {
+  /*if (mainDescription === "Clear") {
     let emoji = document.querySelector(".current-emoji");
     emoji.innerHTML = `☀️`;
   }
@@ -122,7 +147,7 @@ function updateEmoji(mainDescription) {
   if (mainDescription === "Thunderstorm") {
     let emoji = document.querySelector(".current-emoji");
     emoji.innerHTML = `⛈`;
-  }
+  }*/
 }
 
 // other descriptions: haze, clouds, mist, clear, drizzle, scattered clouds
