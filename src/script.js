@@ -52,7 +52,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  console.log(response.data);
+  //console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -74,6 +74,7 @@ function displayCurrentData(response) {
   fahrenheitTemperature = response.data.main.temp;
   fahrenheitLowTemp = response.data.main.temp_min;
   fahrenheitHighTemp = response.data.main.temp_max;
+  fahrenheitFeelsLikeTemp = response.data.main.feels_like;
 
   let iconElement = document.querySelector(".current-emoji");
   iconElement.setAttribute(
@@ -110,7 +111,7 @@ function updateDescription(description) {
 function updateFeelsLike(feelsLike) {
   let newFeelsLike = Math.round(feelsLike);
   let currentFeelsLike = document.querySelector("#feels-like");
-  currentFeelsLike.innerHTML = `Feels like ${newFeelsLike}º`;
+  currentFeelsLike.innerHTML = `${newFeelsLike}`;
 }
 
 function updateWind(wind) {
@@ -142,12 +143,9 @@ function convertToCelsius(event) {
   let celsiusHighTemp = ((fahrenheitHighTemp - 32) * 5) / 9;
   fahrenheitHighElement.innerHTML = Math.round(celsiusHighTemp);
 
-  /*let fahrenheitFeelsLikeTemp = document.querySelector("#feels-like-temp");
-  let celsiusFeelsLikeTemp = Math.round(
-    ((fahrenheitFeelsLikeTemp - 32) * 5) / 9
-  );
-  let currentFeelsLikeTemp = document.querySelector("#feels-like-temp");
-  currentFeelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp}`;*/
+  let fahrenheitFeelsLikeElement = document.querySelector("#feels-like");
+  let celsiusFeelsLikeTemp = ((fahrenheitFeelsLikeTemp - 32) * 5) / 9;
+  fahrenheitFeelsLikeElement.innerHTML = Math.round(celsiusFeelsLikeTemp);
 }
 
 function convertToFahrenheit(event) {
@@ -165,11 +163,8 @@ function convertToFahrenheit(event) {
   let highTempElement = document.querySelector("#current-high");
   highTempElement.innerHTML = Math.round(fahrenheitHighTemp);
 
-  /*let celsiusFeelsLikeTemp =
-    document.querySelector("#feels-like-temp").textContent;
-  let fahrenheitFeelsLikeTemp = Math.round((celsiusFeelsLikeTemp * 9) / 5 + 32);
-  let currentFeelsLikeTemp = document.querySelector("#feels-like-temp");
-  currentFeelsLikeTemp.innerHTML = `${fahrenheitFeelsLikeTemp}`;*/
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
 }
 
 function handleSubmit(event) {
@@ -188,6 +183,7 @@ useCurrentLocation.addEventListener("click", displayCurrentTime);
 let fahrenheitTemperature = null;
 let fahrenheitLowTemp = null;
 let fahrenheitHighTemp = null;
+let fahrenheitFeelsLikeTemp = null;
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", convertToCelsius);
