@@ -114,47 +114,7 @@ function updateWeatherIcon(weatherIcon) {
     "src",
     `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
   );
-
-  console.log(weatherIcon);
-
-  /*if (mainDescription === "Clear") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `☀️`;
-  }
-
-  if (mainDescription === "Clouds") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `☁️`;
-  }
-
-  if (mainDescription === "Haze") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `🌥`;
-  }
-
-  if (mainDescription === "Mist" || mainDescription === "Drizzle") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `🌨`;
-  }
-
-  if (mainDescription === "Rain") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `🌧`;
-  }
-
-  if (mainDescription === "Snow") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `❄️`;
-  }
-
-  if (mainDescription === "Thunderstorm") {
-    let emoji = document.querySelector(".current-emoji");
-    emoji.innerHTML = `⛈`;
-  }*/
 }
-
-// other descriptions: haze, clouds, mist, clear, drizzle, scattered clouds
-// could try to pull icons from openweather
 
 function updateDescription(description) {
   let descriptionInput = description.split(" ");
