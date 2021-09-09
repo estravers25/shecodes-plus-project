@@ -110,7 +110,15 @@ p {
   bottom: 22px;
 }
 
+.celsius-fahrenheit #fahrenheit-link,
+#celsius-link {
+  color: #161b7f;
+}
+
 .weather-temperature .active {
+  color: #161b7f;
+  cursor: default;
+  text-decoration: none;
 }
 
 .weather-temperature .active:hover {
