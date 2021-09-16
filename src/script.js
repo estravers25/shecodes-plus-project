@@ -52,7 +52,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  //console.log(response.data);
+  console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -79,48 +79,31 @@ function displayCurrentData(response) {
   let iconElement = document.querySelector(".current-emoji");
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
   let description = response.data.weather[0].description;
-  updateDescription(description);
-
-  let feelsLike = response.data.main.feels_like;
-  updateFeelsLike(feelsLike);
-
-  let wind = response.data.wind.speed;
-  updateWind(wind);
-
-  let humidity = response.data.main.humidity;
-  updateHumidity(humidity);
-}
-
-function updateDescription(description) {
   let descriptionInput = description.split(" ");
   for (let i = 0; i < descriptionInput.length; i++) {
     descriptionInput[i] =
       descriptionInput[i][0].toUpperCase() + descriptionInput[i].substr(1);
   }
   let newDescription = descriptionInput.join(" ");
-
   let currentDescription = document.querySelector("#weather-description");
   currentDescription.innerHTML = `${newDescription}`;
-}
 
-function updateFeelsLike(feelsLike) {
+  let feelsLike = response.data.main.feels_like;
   let newFeelsLike = Math.round(feelsLike);
   let currentFeelsLike = document.querySelector("#feels-like");
   currentFeelsLike.innerHTML = `${newFeelsLike}`;
-}
 
-function updateWind(wind) {
+  let wind = response.data.wind.speed;
   let newWind = Math.round(wind);
   let currentWind = document.querySelector("#wind");
   currentWind.innerHTML = `${newWind} mph Wind`;
-}
 
-function updateHumidity(humidity) {
+  let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
   currentHumidity.innerHTML = `${humidity}% Humidity`;
 }
