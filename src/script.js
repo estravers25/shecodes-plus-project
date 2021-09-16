@@ -52,7 +52,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  console.log(response.data);
+  //console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -93,15 +93,13 @@ function displayCurrentData(response) {
   let currentDescription = document.querySelector("#weather-description");
   currentDescription.innerHTML = `${newDescription}`;
 
-  let feelsLike = response.data.main.feels_like;
-  let newFeelsLike = Math.round(feelsLike);
+  let feelsLike = Math.round(response.data.main.feels_like);
   let currentFeelsLike = document.querySelector("#feels-like");
-  currentFeelsLike.innerHTML = `${newFeelsLike}`;
+  currentFeelsLike.innerHTML = `${feelsLike}`;
 
-  let wind = response.data.wind.speed;
-  let newWind = Math.round(wind);
+  let wind = Math.round(response.data.wind.speed);
   let currentWind = document.querySelector("#wind");
-  currentWind.innerHTML = `${newWind} mph Wind`;
+  currentWind.innerHTML = `${wind} mph Wind`;
 
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
