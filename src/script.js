@@ -44,6 +44,12 @@ function displayCurrentTime() {
   searchTime.innerHTML = `${currentTime}`;
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#new-city");
+  search(cityInputElement.value);
+}
+
 function search(city) {
   let apiKey = "56a5727662e9674f972770adf6f30527";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
@@ -52,7 +58,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  //console.log(response.data);
+  console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -146,12 +152,6 @@ function convertToFahrenheit(event) {
 
   let feelsLikeElement = document.querySelector("#feels-like");
   feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
-}
-
-function handleSubmit(event) {
-  event.preventDefault();
-  let cityInputElement = document.querySelector("#new-city");
-  search(cityInputElement.value);
 }
 
 let form = document.querySelector("#new-city-search");
