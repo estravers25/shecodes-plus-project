@@ -154,6 +154,33 @@ function convertToFahrenheit(event) {
   feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
 }
 
+function displayForecast(){
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row justify-content-center" id="forecast">`;
+  days.forEach(function(day){
+    forecastHTML = forecastHTML + `<div class="col-2">        
+              <h4 class="weather-forecast-day">${day}</h4>
+              <p>
+                <div class="forecast-temps">
+                  72ºF / 94º F
+                </div>
+                <div class="forecast-description">
+                  Sunny
+                </div>
+                <div class="forecast-icon">
+                  ☀️
+                </div>
+              </p>
+            </div>`})
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML=forecastHTML;  
+}
+
 let form = document.querySelector("#new-city-search");
 form.addEventListener("submit", handleSubmit);
 
@@ -175,3 +202,4 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 displayCurrentTime();
 
 search("New York");
+displayForecast();

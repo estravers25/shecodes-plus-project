@@ -37,6 +37,7 @@ h3 {
 h4 {
   color: #8d3fd0;
   font-weight: 600;
+  line-height: 15px;
 }
 
 p {
@@ -150,12 +151,13 @@ p {
   font-size: 20px;
 }
 
-.forecast {
+.forecast-container {
   border: 3px solid #8d3fd0;
   padding: 15px 10px 5px 10px;
   margin: 0px 10px;
   box-shadow: 3px 3px 8px rgba(54, 52, 52, 0.7);
   background: rgba(176, 122, 223, 0.1);
+  text-align: center;
 }
 
 .developer-links {
