@@ -58,7 +58,7 @@ function search(city) {
 }
 
 function displayCurrentData(response) {
-  console.log(response.data);
+  //console.log(response.data);
 
   let currentTemp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
@@ -110,6 +110,8 @@ function displayCurrentData(response) {
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
   currentHumidity.innerHTML = `${humidity}% Humidity`;
+
+  getForecast(response.data.coord);
 }
 
 function convertToCelsius(event) {
@@ -154,7 +156,15 @@ function convertToFahrenheit(event) {
   feelsLikeElement.innerHTML = Math.round(fahrenheitFeelsLikeTemp);
 }
 
-function displayForecast(){
+function getForecast(coordinates){
+  let apiKey="56a5727662e9674f972770adf6f30527";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response){
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
@@ -208,4 +218,3 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 displayCurrentTime();
 
 search("New York");
-displayForecast();
