@@ -161,11 +161,17 @@ function displayForecast(){
 
   let forecastHTML = `<div class="row justify-content-center" id="forecast">`;
   days.forEach(function(day){
-    forecastHTML = forecastHTML + `<div class="col-2">        
+    forecastHTML = forecastHTML + `<div class="col">        
               <h4 class="weather-forecast-day">${day}</h4>
               <p>
                 <div class="forecast-temps">
-                  72ºF / 94º F
+                  <span id="forecast-low">
+                    72ºF
+                  </span>
+                   / 
+                  <span id="forecast-high">
+                    94ºF
+                  </span>
                 </div>
                 <div class="forecast-description">
                   Sunny
