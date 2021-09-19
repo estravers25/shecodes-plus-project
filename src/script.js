@@ -189,7 +189,7 @@ function displayForecast(response){
                   ${forecastDay.weather[0].main}
                 </div>
                 <div class="forecast-icon">
-                  <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="50"/>
+                  <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="50"/>
                 </div>
               </p>
             </div>`
