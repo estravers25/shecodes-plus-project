@@ -104,15 +104,11 @@ p {
   box-shadow: 3px 3px 5px rgba(54, 52, 52, 0.7);
 }
 
-.celsius-fahrenheit {
+.fahrenheit {
   font-size: 20px;
   font-weight: 600;
   position: relative;
   bottom: 22px;
-}
-
-.celsius-fahrenheit #fahrenheit-link,
-#celsius-link {
   color: #161b7f;
 }
 
@@ -169,16 +165,4 @@ p {
 #new-city-submit:hover {
   color: #ffffff;
   background: #0683d7;
-}
-
-#celsius:hover {
-  color: #0683d7;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-#fahrenheit:hover {
-  color: #0683d7;
-  cursor: pointer;
-  text-decoration: underline;
 }
