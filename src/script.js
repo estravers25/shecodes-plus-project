@@ -81,11 +81,6 @@ function displayCurrentData(response) {
   let weatherCityHeader = document.querySelector("#weather-city");
   weatherCityHeader.innerHTML = `${currentCity}`;
 
-  /*fahrenheitTemperature = response.data.main.temp;
-  fahrenheitLowTemp = response.data.main.temp_min;
-  fahrenheitHighTemp = response.data.main.temp_max;
-  fahrenheitFeelsLikeTemp = response.data.main.feels_like;*/
-
   let iconElement = document.querySelector(".current-emoji");
   iconElement.setAttribute(
     "src",
