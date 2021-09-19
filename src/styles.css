@@ -152,7 +152,7 @@ p {
   padding: 15px 0px 5px 0px;
   margin: 0px 10px;
   box-shadow: 3px 3px 8px rgba(54, 52, 52, 0.7);
-  background: rgba(176, 122, 223, 0.1);
+  background: rgba(249, 249, 250, 0.1);
   text-align: center;
 }
 
@@ -165,4 +165,15 @@ p {
 #new-city-submit:hover {
   color: #ffffff;
   background: #0683d7;
+}
+
+#forecast-low {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+}
+
+#forecast-high,
+.forecast-description {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
 }
