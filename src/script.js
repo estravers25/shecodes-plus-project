@@ -164,37 +164,47 @@ function getForecast(coordinates){
 }
 
 function displayForecast(response){
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-
   let forecastHTML = `<div class="row justify-content-center" id="forecast">`;
-  days.forEach(function(day){
-    forecastHTML = forecastHTML + `<div class="col">        
-              <h4 class="weather-forecast-day">${day}</h4>
+  forecast.forEach(function(forecastDay, index){
+    if (index < 5){
+      forecastHTML = forecastHTML + `<div class="col">        
+              <h4 class="weather-forecast-day">
+                ${formatForecastDay(forecastDay.dt)}
+              </h4>
               <p>
                 <div class="forecast-temps">
                   <span id="forecast-low">
-                    72ºF
+                    ${Math.round(forecastDay.temp.min)}ºF
                   </span>
                    / 
                   <span id="forecast-high">
-                    94ºF
+                    ${Math.round(forecastDay.temp.max)}ºF
                   </span>
                 </div>
                 <div class="forecast-description">
-                  Sunny
+                  ${forecastDay.weather[0].main}
                 </div>
                 <div class="forecast-icon">
-                  ☀️
+                  <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="50"/>
                 </div>
               </p>
-            </div>`})
+            </div>`
+    }
 
-  forecastHTML = forecastHTML + `</div>`;
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML=forecastHTML;
+  })
+}
 
-  forecastElement.innerHTML=forecastHTML;  
+function formatForecastDay(timestamp){
+  let date = new Date(timestamp*1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
 }
 
 let form = document.querySelector("#new-city-search");
